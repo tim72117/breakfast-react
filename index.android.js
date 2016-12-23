@@ -23,7 +23,7 @@ export default class myReact extends Component {
         this.state = {zip: '', name: 'gg'};
         //var ds = new ListView.DataSource({});
     }
-    
+
     _handleTextChange(event) {
         this.setState({zip: event.nativeEvent.text});
     }
@@ -33,7 +33,6 @@ export default class myReact extends Component {
             uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
         };
 
-        console.log("You tapped the button!");
         return (
             <View style={styles.container}>
                 <Foreacast name={this.state.name} />
@@ -52,4 +51,4 @@ const styles = StyleSheet.create({
     },
 });
 
-AppRegistry.registerComponent('myReact', () => myReact);
+AppRegistry.registerComponent('breakfast_react', () => myReact);
