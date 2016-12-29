@@ -5,7 +5,8 @@ import {
     Text,
     ListView,
     TouchableHighlight,
-    Navigator
+    Navigator,
+    ActivityIndicator
 } from 'react-native';
 import SecondPageComponent from './SecondPageComponent';
 
@@ -13,7 +14,7 @@ export default class FirstPageComponent extends Component {
     constructor(props) {
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         super(props);
-        this.state = {listRows: ds.cloneWithRows([{index: 0, title: 'gg'}])};
+        this.state = {loading: true, listRows: ds.cloneWithRows([{index: 0, title: 'gg'}])};
     }
 
     _pressButton() {
@@ -33,7 +34,7 @@ export default class FirstPageComponent extends Component {
     }
 
     componentDidMount() {
-        fetch('http://104.199.155.0/products')
+        fetch('http://104.199.155.0:82/products')
         .then((response) => response.json())
         .then((responseJSON) => {
             var index = 0;
@@ -42,16 +43,20 @@ export default class FirstPageComponent extends Component {
                 index++;
             }, this);
             console.log(responseJSON);
-            this.setState({listRows: this.state.listRows.cloneWithRows(responseJSON.products)});
+            this.setState({listRows: this.state.listRows.cloneWithRows(responseJSON.products), loading: false});
         });
     }
 
     render() {
-        return (
-
-            <ListView style={styles.list} dataSource={this.state.listRows} renderRow={this._renderRow.bind(this)} />
-
-        );
+        if (this.state.loading) {
+            return <ActivityIndicator
+                animating={this.state.loading}
+                style={{flex: 1}}
+                size={60}
+            />
+        } else {
+            return <ListView style={styles.list} dataSource={this.state.listRows} renderRow={this._renderRow.bind(this)} />
+        }
     }
 }
 

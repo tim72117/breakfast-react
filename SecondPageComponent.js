@@ -3,22 +3,27 @@ import {
     View,
     Text,
     Navigator,
-    Picker
+    Picker,
+    Button
 } from 'react-native';
 
 export default class SecondPageComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = {amount: 1};
+        this.state = {amount: 1, gg: 0};
+    }
+
+    _addToCart() {
+        this.setState({gg: this.state.amount});
     }
 
     render() {
         return (
             <View>
-                <Text>選擇數量</Text>
+                <Text>選擇數量{this.state.gg}</Text>
                 <Picker
                 selectedValue={this.state.amount}
-                onValueChange={(lang) => this.setState({language: lang})}>
+                onValueChange={(amount) => this.setState({amount: amount})}>
                     <Picker.Item label="1" value="1" />
                     <Picker.Item label="2" value="2" />
                     <Picker.Item label="3" value="3" />
@@ -30,6 +35,12 @@ export default class SecondPageComponent extends Component {
                     <Picker.Item label="9" value="9" />
                     <Picker.Item label="10" value="10" />
                 </Picker>
+                <Button
+                onPress={this._addToCart.bind(this)}
+                title="加入購物車"
+                color="#841584"
+                accessibilityLabel="Learn more about this purple button"
+                />
             </View>
         );
     }
