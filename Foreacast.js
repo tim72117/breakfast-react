@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import {
     View,
     StyleSheet,
@@ -9,10 +11,11 @@ import {
 } from 'react-native';
 import FirstPageComponent from './FirstPageComponent';
 
-class Foreacast extends Component {
+export default class Foreacast extends Component {
     constructor(props) {
+        let rootReducer = () => {};
         super(props);
-        this.state = {showText: true};
+        this.state = {showText: true, store: createStore(rootReducer)};
         setInterval(() => {
             //this.setState({ showText: !this.state.showText });
         }, 1000);
@@ -21,7 +24,6 @@ class Foreacast extends Component {
     _onPressButton() {
         console.log(this.props.name);
         this.setState({ showText: this.state.showText });
-        console.log("You tapped the button!");
     }
 
     render() {
@@ -29,6 +31,7 @@ class Foreacast extends Component {
         let defaultName = '餐點';
         let defaultComponent = FirstPageComponent;
         return (
+            <Provider store={this.state.store}>
             <Navigator
                 navigationBar={
                     <Navigator.NavigationBar
@@ -69,6 +72,7 @@ class Foreacast extends Component {
                 }}
                 style={{padding: 1, flexDirection: 'row', flex: 1}}
             />
+            </Provider>
         );
     }
 }
@@ -76,5 +80,3 @@ class Foreacast extends Component {
 const styles = StyleSheet.create({
 
 });
-
-module.exports = Foreacast;

@@ -4,22 +4,39 @@ import {
     Text,
     Navigator,
     Picker,
-    Button
+    Button,
+    TouchableHighlight
 } from 'react-native';
+import CartPageComponent from './CartPageComponent';
 
 export default class SecondPageComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = {amount: 1, gg: 0};
+        this.state = {amount: 1, gg: 0, product: props.product};
     }
 
     _addToCart() {
         this.setState({gg: this.state.amount});
     }
 
+    _cartPage() {
+        const { navigator } = this.props;
+
+        if(navigator) {
+            navigator.push({
+                name: '購物車',
+                component: CartPageComponent,
+                params: {
+                    amount: 2
+                }
+            })
+        }
+    }
+
     render() {
         return (
             <View>
+                <Text>{this.state.product.title}</Text>
                 <Text>選擇數量{this.state.gg}</Text>
                 <Picker
                 selectedValue={this.state.amount}
@@ -41,6 +58,7 @@ export default class SecondPageComponent extends Component {
                 color="#841584"
                 accessibilityLabel="Learn more about this purple button"
                 />
+                <TouchableHighlight onPress={this._cartPage.bind(this)}><Text>購物車</Text></TouchableHighlight>
             </View>
         );
     }

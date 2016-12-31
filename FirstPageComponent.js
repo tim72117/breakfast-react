@@ -17,20 +17,22 @@ export default class FirstPageComponent extends Component {
         this.state = {loading: true, listRows: ds.cloneWithRows([{index: 0, title: 'gg'}])};
     }
 
-    _pressButton() {
-        console.log(1);
+    _pressButton(product) {
         const { navigator } = this.props;
 
         if(navigator) {
             navigator.push({
                 name: '選擇數量',
                 component: SecondPageComponent,
+                params: {
+                    product: product
+                }
             })
         }
     }
 
     _renderRow(product) {
-        return <TouchableHighlight onPress={this._pressButton.bind(this)}><Text>{product.title}</Text></TouchableHighlight>
+        return <TouchableHighlight onPress={this._pressButton.bind(this, product)}><Text>{product.title}</Text></TouchableHighlight>
     }
 
     componentDidMount() {
