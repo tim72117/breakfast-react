@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import FirstPageComponent from './FirstPageComponent';
 
-export default class Foreacast extends Component {
+export default class MenuNavigator extends Component {
     constructor(props) {
         let rootReducer = () => {};
         super(props);
@@ -70,6 +70,9 @@ export default class Foreacast extends Component {
                         </View>
                     )
                 }}
+                configureScene={(route, routeStack) =>
+                    Navigator.SceneConfigs.FloatFromRight
+                }
                 style={{padding: 1, flexDirection: 'row', flex: 1}}
             />
             </Provider>

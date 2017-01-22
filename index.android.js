@@ -14,7 +14,7 @@ import {
   ActivityIndicator,
   TextInput
 } from 'react-native';
-import Foreacast from './Foreacast';
+import MenuNavigator from './MenuNavigator';
 
 export default class myReact extends Component {
 
@@ -35,7 +35,7 @@ export default class myReact extends Component {
 
         return (
             <View style={styles.container}>
-                <Foreacast name={this.state.name} />
+                <MenuNavigator name={this.state.name} />
             </View>
         );
     }

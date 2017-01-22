@@ -32,7 +32,7 @@ export default class FirstPageComponent extends Component {
     }
 
     _renderRow(product) {
-        return <TouchableHighlight onPress={this._pressButton.bind(this, product)}><Text>{product.title}</Text></TouchableHighlight>
+        return <TouchableHighlight style={styles.row} onPress={this._pressButton.bind(this, product)}><Text>{product.title}</Text></TouchableHighlight>
     }
 
     componentDidMount() {
@@ -68,8 +68,10 @@ const styles = StyleSheet.create({
     },
     row: {
         flex: 1,
-        padding: 10,
+        paddingTop: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
         borderBottomWidth: 1,
-        borderColor: 'gray'
+        borderBottomColor: '#ededed',
     }
 });
