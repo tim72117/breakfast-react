@@ -1,85 +1,76 @@
 import React, { Component } from 'react';
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import {
     View,
     StyleSheet,
     Text,
     TouchableHighlight,
-    ListView,
-    Navigator
+    Navigator,
+    ListView
 } from 'react-native';
+import { Scene, Router, Modal, Actions } from 'react-native-router-flux';
+import { MKColor } from 'react-native-material-kit';
+import { Button } from 'native-base';
 import FirstPageComponent from './FirstPageComponent';
+import SecondPageComponent from './SecondPageComponent';
+import CartPageComponent from './CartPageComponent';
+
+const RouterWithRedux = connect()(Router);
+const store = createStore((state = {}, action = {}) => {
+    switch(action.type) {
+        case 'CARTS':
+            return {...state, carts: action.carts};
+        case 'ADD_TO_CARTS':
+            return {...state, carts: [...state.carts, action.cart]};
+        case 'REMOVE_ALL_CARTS':
+            return {...state, carts: []};
+        default:
+            return state;
+    }
+});
+
+store.dispatch({type: 'CARTS', carts: []});
 
 export default class MenuNavigator extends Component {
+
     constructor(props) {
-        let rootReducer = () => {};
         super(props);
-        this.state = {showText: true, store: createStore(rootReducer)};
-        setInterval(() => {
-            //this.setState({ showText: !this.state.showText });
-        }, 1000);
+        this.state = {};
     }
 
-    _onPressButton() {
-        console.log(this.props.name);
-        this.setState({ showText: this.state.showText });
+    _renderRightButton() {
+        return <TouchableHighlight onPress={this._toCartPage.bind(this)}><Text>購物車</Text></TouchableHighlight>
+    }
+
+    _toCartPage() {
+        console.log(1)
+        Actions.CartPage();
     }
 
     render() {
-        let display = this.state.showText ? 'ggg' : ' ';
-        let defaultName = '餐點';
-        let defaultComponent = FirstPageComponent;
         return (
-            <Provider store={this.state.store}>
-            <Navigator
-                navigationBar={
-                    <Navigator.NavigationBar
-                        routeMapper={{
-                            LeftButton: (route, navigator, index, navState) =>
-                            {
-                                if (route.index === 0) {
-                                    return null;
-                                } else {
-                                    return (
-                                        <TouchableHighlight onPress={() => navigator.pop()}>
-                                        <Text>返回</Text>
-                                        </TouchableHighlight>
-                                    );
-                                }
-                            },
-                            RightButton: (route, navigator, index, navState) =>
-                            {
-                                return (<Text>Done</Text>);
-                            },
-                            Title: (route, navigator, index, navState) =>
-                            {
-                                return (<Text>{route.name}</Text>);
-                            }
-                        }}
-                        style={{backgroundColor: 'gray', padding: 0}}
-                    />
-                }
-                initialRoute={{name: defaultName, component: defaultComponent}}
-                //initialRouteStack={routes}
-                renderScene={(route, navigator) => {
-                    let Component = route.component;
-                    return (
-                        <View style={{flex: 1, paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}}>
-                            <Component {...route.params} navigator={navigator} />
-                        </View>
-                    )
-                }}
-                configureScene={(route, routeStack) =>
-                    Navigator.SceneConfigs.FloatFromRight
-                }
-                style={{padding: 1, flexDirection: 'row', flex: 1}}
-            />
+            <Provider store={store}>
+            <RouterWithRedux navigationBarStyle={styles.navBar} renderRightButton={this._renderRightButton.bind(this)}>
+                <Scene key="modal" component={Modal} >
+                <Scene key="root">
+                    <Scene style={styles.page} key="FirstPage" component={FirstPageComponent} title="餐點目錄" direction="leftToRight" />
+                    <Scene style={styles.page} key="SecondPage" component={SecondPageComponent} title="選擇餐點"/>
+                    <Scene style={styles.page} key="CartPage" component={CartPageComponent} title="購物車" direction="vertical"/>
+                </Scene>
+                </Scene>
+            </RouterWithRedux>
             </Provider>
         );
     }
 }
 
 const styles = StyleSheet.create({
-
+    page: {
+        flex: 1,
+        paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight
+    },
+    navBar: {
+        backgroundColor: MKColor.Teal
+    }
 });
