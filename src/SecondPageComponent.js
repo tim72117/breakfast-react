@@ -5,7 +5,7 @@ import {
     Image
 } from 'react-native';
 import CartPageComponent from './CartPageComponent';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import { Container, Content, Card, CardItem, Body, Left, Right, Thumbnail, Picker, Button, Text } from 'native-base';
 
 export default class SecondPageComponent extends Component {
@@ -18,7 +18,7 @@ export default class SecondPageComponent extends Component {
     _addToCart() {
         this.state.product.amount = this.state.amount;
         this.props.dispatch({type: 'ADD_TO_CARTS', cart: this.state.product});
-        Actions.FirstPage({type: 'reset'});
+        Actions.FirstPage({type: ActionConst.RESET});
     }
 
     _toCartPage() {

@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingBottom: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#ededed',
+        borderBottomColor: MKColor.Red,
     }
 });
 

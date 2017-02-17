@@ -51,8 +51,8 @@ export default class MenuNavigator extends Component {
     render() {
         return (
             <Provider store={store}>
-            <RouterWithRedux navigationBarStyle={styles.navBar} renderRightButton={this._renderRightButton.bind(this)}>
-                <Scene key="modal" component={Modal}>
+            <RouterWithRedux navigationBarStyle={styles.navBar} renderRightButton={this._renderRightButton.bind(this)} leftButtonIconStyle={{}}>
+                <Scene key="modal" component={Modal} >
                 <Scene key="root">
                     <Scene style={styles.page} key="FirstPage" component={FirstPageComponent} title="餐點目錄" direction="leftToRight" />
                     <Scene style={styles.page} key="SecondPage" component={SecondPageComponent} title="選擇餐點"/>

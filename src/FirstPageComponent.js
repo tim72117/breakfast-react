@@ -13,8 +13,9 @@ import {
 import { MKButton, MKColor, getTheme } from 'react-native-material-kit';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { Container, Icon, Left, Body, Right, ListItem, Thumbnail, Button, List, Content, Footer } from 'native-base';
+import { Container, Icon, Left, Body, Right, Thumbnail, Button, List, Content, Footer } from 'native-base';
 import TotalBar from './TotalBar';
+import { ListItem } from 'react-native-elements';
 
 class FirstPageComponent extends Component {
 
@@ -50,23 +51,15 @@ class FirstPageComponent extends Component {
     }
 
     _renderRow(product) {
-        return <ListItem avatar icon onPress={this._pressButton.bind(this, product)}>
-            <Left>
-                <Thumbnail source={{uri: product.image ? product.image : 'http://104.199.155.0:82/images/128-128-661117d81dd8ad0fa59a79fda9ca6425-egg.png'}} />
-            </Left>
-            <Body style={{flex: 1}}>
-                <Text>{product.title}</Text>
-            </Body>
-            <Right>
-                <Icon name="md-arrow-dropright" />
-                            {/*<Button title="View">
-                                <Text>View</Text>
-                            </Button>*/}
-                {/*<TouchableHighlight style={styles.row} onPress={this._pressButton.bind(this, product)}>
-                    <Text>選擇</Text>
-                </TouchableHighlight>*/}
-            </Right>
-        </ListItem>
+        return (
+            <ListItem
+                avatar={{uri: product.image ? product.image : 'http://104.199.155.0:82/images/128-128-661117d81dd8ad0fa59a79fda9ca6425-egg.png'}}
+                avatarStyle={{width: 50, height: 50}}
+                title={product.title}
+                onPress={this._pressButton.bind(this, product)}
+                containerStyle={{height: 100, justifyContent: 'center'}}>
+            </ListItem>
+        )
     }
 
     render() {
@@ -79,7 +72,6 @@ class FirstPageComponent extends Component {
         } else {
             return (
                 <Container>
-                <Content>
                 <List style={{flex: 1}}
                     refreshControl={
                         <RefreshControl
@@ -89,7 +81,6 @@ class FirstPageComponent extends Component {
                     }
                     dataArray={this.state.products} renderRow={this._renderRow.bind(this)}>
                 </List>
-                </Content>
                 <Footer style={{backgroundColor: MKColor.Red, height: 30}}>
                     <TotalBar />
                 </Footer>
