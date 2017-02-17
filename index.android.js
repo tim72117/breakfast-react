@@ -14,7 +14,7 @@ import {
   ActivityIndicator,
   TextInput
 } from 'react-native';
-import MenuNavigator from './MenuNavigator';
+import MenuNavigator from './src/MenuNavigator';
 
 export default class myReact extends Component {
 
