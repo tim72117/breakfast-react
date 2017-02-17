@@ -52,7 +52,7 @@ export default class MenuNavigator extends Component {
         return (
             <Provider store={store}>
             <RouterWithRedux navigationBarStyle={styles.navBar} renderRightButton={this._renderRightButton.bind(this)}>
-                <Scene key="modal" component={Modal} >
+                <Scene key="modal" component={Modal}>
                 <Scene key="root">
                     <Scene style={styles.page} key="FirstPage" component={FirstPageComponent} title="餐點目錄" direction="leftToRight" />
                     <Scene style={styles.page} key="SecondPage" component={SecondPageComponent} title="選擇餐點"/>
@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
         paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight
     },
     navBar: {
-        backgroundColor: MKColor.Teal
+        backgroundColor: MKColor.Red
     }
 });

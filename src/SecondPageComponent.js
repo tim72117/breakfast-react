@@ -28,7 +28,7 @@ export default class SecondPageComponent extends Component {
     render() {
         return (
             <Container>
-            <Content>
+            <Content padder>
                 <Card>
                     <CardItem>
                         <Left>
@@ -37,8 +37,8 @@ export default class SecondPageComponent extends Component {
                             </Body>
                         </Left>
                     </CardItem>
-                    <CardItem cardBody>
-                        <Image source={{uri: this.state.product.image}} style={{width: 40, height: 40}} />
+                    <CardItem cardBody style={{justifyContent: 'center'}}>
+                        <Image source={{uri: this.state.product.image}} style={{width: 80, height: 80}} />
                     </CardItem>
                     <CardItem>
                         <Left>

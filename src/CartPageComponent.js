@@ -9,6 +9,8 @@ import {
     Button
 } from 'react-native';
 import { connect } from 'react-redux';
+import { MKColor } from 'react-native-material-kit';
+import { List } from 'native-base';
 
 class CartPageComponent extends Component {
 
@@ -17,7 +19,7 @@ class CartPageComponent extends Component {
         super(props);
         this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         console.log(carts);
-        this.state = {listRows: this.ds.cloneWithRows(carts)};
+        this.state = {carts: carts};
     }
 
     _renderRow(product) {
@@ -51,11 +53,11 @@ class CartPageComponent extends Component {
     render() {
         return (
             <View style={{flex: 1}}>
-                <ListView style={styles.list} dataSource={this.state.listRows} renderRow={this._renderRow.bind(this)} enableEmptySections={true} />
+                <List dataArray={this.state.carts} renderRow={this._renderRow.bind(this)} />
                 <Button
                 onPress={this._order.bind(this)}
                 title="結帳"
-                color="#841584"
+                color={MKColor.Red}
                 accessibilityLabel="Learn more about this purple button"
                 />
             </View>
