@@ -40,7 +40,7 @@ export default class MenuNavigator extends Component {
     }
 
     _renderRightButton() {
-        return <TouchableHighlight onPress={this._toCartPage.bind(this)}><Text>購物車</Text></TouchableHighlight>
+        return <TouchableHighlight onPress={this._toCartPage.bind(this)}><Text style={{fontSize: 16}}>購物車</Text></TouchableHighlight>
     }
 
     _toCartPage() {

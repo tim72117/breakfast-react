@@ -12,7 +12,7 @@ export default class TotalBar extends Component {
     render() {
         return (
             <Left style={{marginLeft: 10}}>
-                <Text style={{fontSize: 12}}>總計{this.state.total}元</Text>
+                <Text style={{fontSize: 16}}>總計{this.state.total}元</Text>
             </Left>
         )
     }

@@ -56,8 +56,9 @@ class FirstPageComponent extends Component {
                 avatar={{uri: product.image ? product.image : 'http://104.199.155.0:82/images/128-128-661117d81dd8ad0fa59a79fda9ca6425-egg.png'}}
                 avatarStyle={{width: 50, height: 50}}
                 title={product.title}
+                titleStyle={{fontSize: 18}}
                 onPress={this._pressButton.bind(this, product)}
-                containerStyle={{height: 100, justifyContent: 'center'}}>
+                containerStyle={{height: 80, justifyContent: 'center'}}>
             </ListItem>
         )
     }
@@ -81,7 +82,7 @@ class FirstPageComponent extends Component {
                     }
                     dataArray={this.state.products} renderRow={this._renderRow.bind(this)}>
                 </List>
-                <Footer style={{backgroundColor: MKColor.Red, height: 30}}>
+                <Footer style={{backgroundColor: MKColor.Red, height: 40}}>
                     <TotalBar />
                 </Footer>
                 </Container>
