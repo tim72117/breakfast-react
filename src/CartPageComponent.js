@@ -6,11 +6,11 @@ import {
     ListView,
     TouchableHighlight,
     ActivityIndicator,
-    Button
+    Image
 } from 'react-native';
 import { connect } from 'react-redux';
 import { MKColor } from 'react-native-material-kit';
-import { List } from 'native-base';
+import { Container, Content, Card, CardItem, Left, Right, Body, Footer, List, Button } from 'native-base';
 
 class CartPageComponent extends Component {
 
@@ -22,8 +22,32 @@ class CartPageComponent extends Component {
         this.state = {carts: carts};
     }
 
+    _removeCart() {
+    }
+
     _renderRow(product) {
-        return <TouchableHighlight style={styles.row}><Text>{product.title}X{product.amount}</Text></TouchableHighlight>
+        return (
+            <Card>
+                <CardItem>
+                    <Left>
+                        <Body>
+                            <Text>{product.title}</Text>
+                        </Body>
+                    </Left>
+                </CardItem>
+                <CardItem cardBody style={{justifyContent: 'center'}}>
+                    <Image source={{uri: product.image}} style={{width: 80, height: 80}} />
+                </CardItem>
+                <CardItem>
+                    <Text>X{product.amount}</Text>
+                    <Right>
+                        <Button transparent onPress={this._removeCart.bind(this)}>
+                            <Text>移除</Text>
+                        </Button>
+                    </Right>
+                </CardItem>
+            </Card>
+        );
     }
 
     _order() {
@@ -52,15 +76,12 @@ class CartPageComponent extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
-                <List dataArray={this.state.carts} renderRow={this._renderRow.bind(this)} />
-                <Button
-                onPress={this._order.bind(this)}
-                title="結帳"
-                color={MKColor.Red}
-                accessibilityLabel="Learn more about this purple button"
-                />
-            </View>
+            <Container>
+                <Content>
+                    <List style={{flex: 1}} dataArray={this.state.carts} renderRow={this._renderRow.bind(this)} />
+                </Content>
+                <Button block={true} onPress={this._order.bind(this)} success><Text>結帳</Text></Button>
+            </Container>
         )
     }
 }
