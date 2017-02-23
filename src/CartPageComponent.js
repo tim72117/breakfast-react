@@ -7,13 +7,17 @@ import { MKColor } from 'react-native-material-kit';
 class CartPageComponent extends Component {
 
     constructor(props) {
-        const { carts } = props;
         super(props);
+        const { carts } = props;
         console.log(carts);
         this.state = {carts: carts};
+        this._renderRow = this._renderRow.bind(this);
     }
 
-    _removeCart() {
+    _removeCart(product) {
+        this.props.dispatch({type: 'REMOVE_PRODUCT', product: product});
+        this.setState({carts: []});
+        //console.error(product);
     }
 
     _renderRow(product) {
@@ -32,7 +36,7 @@ class CartPageComponent extends Component {
                 <CardItem>
                     <Text>X{product.amount}</Text>
                     <Right>
-                        <Button transparent onPress={this._removeCart.bind(this)}>
+                        <Button transparent onPress={this._removeCart.bind(this, product)}>
                             <Text>移除</Text>
                         </Button>
                     </Right>
@@ -67,8 +71,8 @@ class CartPageComponent extends Component {
     render() {
         return (
             <Container>
-                <Content>
-                    <List dataArray={this.state.carts} renderRow={this._renderRow.bind(this)} />
+                <Content padder>
+                    <List dataArray={this.state.carts} renderRow={this._renderRow} />
                 </Content>
                 <Footer>
                     <FooterTab style={{backgroundColor: MKColor.Red}}>

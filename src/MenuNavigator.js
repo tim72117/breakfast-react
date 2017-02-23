@@ -18,6 +18,14 @@ const store = createStore((state = {}, action = {}) => {
             return {...state, carts: [...state.carts, action.cart]};
         case 'REMOVE_ALL_CARTS':
             return {...state, carts: []};
+        case 'REMOVE_PRODUCT':
+            var i = state.carts.indexOf(action.product);
+            state.carts.splice(i);
+            console.log('carts');
+            console.log(i);
+            console.log(state.carts);
+            console.log('end');
+            return {...state, carts: []};
         default:
             return state;
     }
