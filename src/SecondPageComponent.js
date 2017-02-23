@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import CartPageComponent from './CartPageComponent';
 import { Actions, ActionConst } from 'react-native-router-flux';
+import { MKColor } from 'react-native-material-kit';
 import { Container, Content, Card, CardItem, Body, Left, Right, Thumbnail, Picker, Button, Text } from 'native-base';
 
 export default class SecondPageComponent extends Component {
@@ -60,11 +61,9 @@ export default class SecondPageComponent extends Component {
                         </Left>
                     </CardItem>
                     <CardItem>
-                        <Right>
-                            <Button transparent onPress={this._addToCart.bind(this)}>
+                            <Button block style={{flex: 1, backgroundColor: MKColor.Red}} onPress={this._addToCart.bind(this)}>
                                 <Text>加入購物車</Text>
                             </Button>
-                        </Right>
                     </CardItem>
                 </Card>
             </Content>

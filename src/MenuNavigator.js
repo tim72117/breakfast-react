@@ -5,7 +5,7 @@ import {
     View,
     StyleSheet,
     Text,
-    TouchableHighlight,
+    TouchableOpacity,
     Navigator,
     ListView
 } from 'react-native';
@@ -40,7 +40,7 @@ export default class MenuNavigator extends Component {
     }
 
     _renderRightButton() {
-        return <TouchableHighlight onPress={this._toCartPage.bind(this)}><Text style={{fontSize: 16}}>購物車</Text></TouchableHighlight>
+        return <TouchableOpacity onPress={this._toCartPage.bind(this)}><Text style={{fontSize: 16, color: 'white'}}>購物車</Text></TouchableOpacity>
     }
 
     _toCartPage() {

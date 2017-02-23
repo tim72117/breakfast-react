@@ -80,7 +80,7 @@ class CartPageComponent extends Component {
                 <Content>
                     <List style={{flex: 1}} dataArray={this.state.carts} renderRow={this._renderRow.bind(this)} />
                 </Content>
-                <Button block={true} onPress={this._order.bind(this)} success><Text>結帳</Text></Button>
+                <Button block style={{backgroundColor: MKColor.Red}} onPress={this._order.bind(this)}><Text>結帳</Text></Button>
             </Container>
         )
     }
