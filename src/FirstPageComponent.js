@@ -1,26 +1,15 @@
-import React, { Component, PropTypes  } from 'react';
-import { createStore } from 'redux';
-import {
-    View,
-    StyleSheet,
-    Text,
-    ListView,
-    TouchableHighlight,
-    Image,
-    ActivityIndicator,
-    RefreshControl
-} from 'react-native';
-import { MKButton, MKColor, getTheme } from 'react-native-material-kit';
-import { Actions } from 'react-native-router-flux';
+import React, { Component  } from 'react';
+import { View, Image, StyleSheet, ActivityIndicator, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
-import { Container, Icon, Left, Body, Right, Thumbnail, Button, List, Content, Footer } from 'native-base';
-import TotalBar from './TotalBar';
+import { Actions } from 'react-native-router-flux';
+import { Container, Content, Footer, FooterTab, Icon, Left, Body, Right, Button, List, Text } from 'native-base';
+import { MKButton, MKColor, getTheme } from 'react-native-material-kit';
 import { ListItem } from 'react-native-elements';
+import TotalBar from './TotalBar';
 
 class FirstPageComponent extends Component {
 
     constructor(props) {
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         super(props);
         this.state = {loading: false, products: [], refreshing: true};
         this._onRefresh();
@@ -73,18 +62,20 @@ class FirstPageComponent extends Component {
         } else {
             return (
                 <Container>
-                <List style={{flex: 1}}
-                    refreshControl={
+                    <Content
+                        refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
                             onRefresh={this._onRefresh.bind(this)}
                         />
-                    }
-                    dataArray={this.state.products} renderRow={this._renderRow.bind(this)}>
-                </List>
-                <Footer style={{backgroundColor: MKColor.Red, height: 40}}>
-                    <TotalBar />
-                </Footer>
+                    }>
+                        <List dataArray={this.state.products} renderRow={this._renderRow.bind(this)}></List>
+                    </Content>
+                    <Footer>
+                        <FooterTab style={{backgroundColor: MKColor.Red}}>
+                            <TotalBar />
+                        </FooterTab>
+                    </Footer>
                 </Container>
             )
         }
@@ -92,12 +83,7 @@ class FirstPageComponent extends Component {
 }
 
 const styles = StyleSheet.create({
-    list: {
-        flex: 1,
-    },
-    row: {
-        borderBottomColor: '#ededed',
-    }
+
 });
 
 export default connect(store => store)(FirstPageComponent);

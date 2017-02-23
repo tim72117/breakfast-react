@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
+import { View,  StyleSheet, TouchableOpacity, Navigator } from 'react-native';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
-import {
-    View,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    Navigator,
-    ListView
-} from 'react-native';
 import { Scene, Router, Modal, Actions } from 'react-native-router-flux';
+import { Button, Text } from 'native-base';
 import { MKColor } from 'react-native-material-kit';
-import { Button } from 'native-base';
 import FirstPageComponent from './FirstPageComponent';
 import SecondPageComponent from './SecondPageComponent';
 import CartPageComponent from './CartPageComponent';
@@ -37,6 +30,8 @@ export default class MenuNavigator extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+
+        this._renderRightButton = this._renderRightButton.bind(this);
     }
 
     _renderRightButton() {
@@ -51,7 +46,7 @@ export default class MenuNavigator extends Component {
     render() {
         return (
             <Provider store={store}>
-            <RouterWithRedux navigationBarStyle={styles.navBar} renderRightButton={this._renderRightButton.bind(this)} leftButtonIconStyle={{}}>
+            <RouterWithRedux navigationBarStyle={styles.navBar} renderRightButton={this._renderRightButton} leftButtonIconStyle={{tintColor: 'white'}}>
                 <Scene key="modal" component={Modal} >
                 <Scene key="root">
                     <Scene style={styles.page} key="FirstPage" component={FirstPageComponent} title="餐點目錄" direction="leftToRight" />

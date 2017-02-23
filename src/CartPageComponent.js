@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
-import {
-    View,
-    StyleSheet,
-    Text,
-    ListView,
-    TouchableHighlight,
-    ActivityIndicator,
-    Image
-} from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import { Container, Content, Footer, FooterTab, Card, CardItem, Left, Right, Body, List, Button, Text } from 'native-base';
 import { MKColor } from 'react-native-material-kit';
-import { Container, Content, Card, CardItem, Left, Right, Body, Footer, List, Button } from 'native-base';
 
 class CartPageComponent extends Component {
 
     constructor(props) {
         const { carts } = props;
         super(props);
-        this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         console.log(carts);
         this.state = {carts: carts};
     }
@@ -66,11 +57,10 @@ class CartPageComponent extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
             this.props.dispatch({type: 'REMOVE_ALL_CARTS'});
-            this.setState({listRows: this.ds.cloneWithRows([])});
-            //console.error(responseJson);
+            this.setState({carts: []});
         })
         .catch((error) => {
-            //console.error(error);
+            console.error(1);
         });
     }
 
@@ -78,26 +68,22 @@ class CartPageComponent extends Component {
         return (
             <Container>
                 <Content>
-                    <List style={{flex: 1}} dataArray={this.state.carts} renderRow={this._renderRow.bind(this)} />
+                    <List dataArray={this.state.carts} renderRow={this._renderRow.bind(this)} />
                 </Content>
-                <Button block style={{backgroundColor: MKColor.Red}} onPress={this._order.bind(this)}><Text>結帳</Text></Button>
+                <Footer>
+                    <FooterTab style={{backgroundColor: MKColor.Red}}>
+                        <Button light full transparent onPress={this._order.bind(this)}>
+                            <Text style={{fontSize: 14}}>結帳</Text>
+                        </Button>
+                    </FooterTab>
+                </Footer>
             </Container>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    list: {
-        flex: 1,
-    },
-    row: {
-        flex: 1,
-        paddingTop: 10,
-        paddingRight: 10,
-        paddingBottom: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: MKColor.Red,
-    }
+
 });
 
 export default connect(store => store)(CartPageComponent);
