@@ -55,11 +55,11 @@ export default class MenuNavigator extends Component {
         return (
             <Provider store={store}>
             <RouterWithRedux navigationBarStyle={styles.navBar} renderRightButton={this._renderRightButton} leftButtonIconStyle={{tintColor: 'white'}}>
-                <Scene key="modal" component={Modal} >
+                <Scene key="modal" component={Modal}>
                 <Scene key="root">
                     <Scene style={styles.page} key="FirstPage" component={FirstPageComponent} title="餐點目錄" direction="leftToRight" />
-                    <Scene style={styles.page} key="SecondPage" component={SecondPageComponent} title="選擇餐點"/>
-                    <Scene style={styles.page} key="CartPage" component={CartPageComponent} title="購物車" direction="leftToRight"/>
+                    <Scene style={styles.page} key="SecondPage" component={SecondPageComponent} title="選擇餐點" />
+                    <Scene style={styles.page} key="CartPage" component={CartPageComponent} title="購物車" direction="leftToRight" />
                 </Scene>
                 </Scene>
             </RouterWithRedux>

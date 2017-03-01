@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default connect(store => store)(FirstPageComponent);
+export default connect(({routes}) => ({routes}))(FirstPageComponent);

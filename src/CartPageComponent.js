@@ -90,4 +90,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default connect(store => store)(CartPageComponent);
+export default connect(({store}) => ({store}))(CartPageComponent);
